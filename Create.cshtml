@@ -1,0 +1,39 @@
+﻿@model WebApplication1.Models.book
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+<div>
+    @using (Html.BeginForm("Create", "Admin", FormMethod.Post))
+    {
+        <fieldset>
+            <div>
+                @Html.LabelFor(u => u.Firstname) <br />
+                @Html.EditorFor(u => u.Firstname)<br />
+            </div>
+            <div>
+                @Html.LabelFor(u => u.Secondname)<br />
+                @Html.EditorFor(u => u.Secondname)<br />
+            </div>
+            <div>
+                @Html.LabelFor(u => u.Bookname)<br />
+                @Html.EditorFor(u => u.Bookname)<br />
+            </div>
+            <div>
+                @Html.LabelFor(u => u.Author)<br />
+                @Html.EditorFor(u => u.Author)<br />
+            </div>
+            <div>
+                @Html.LabelFor(u => u.Datetaken)<br />
+                @Html.EditorFor(u => u.Datetaken)<br />
+
+                <input type="submit" value="submit" />
+            </div>
+        </fieldset>
+    }
+    @{Html.EndForm();}
+</div>
+

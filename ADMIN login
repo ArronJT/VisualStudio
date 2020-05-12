@@ -1,0 +1,30 @@
+    public class AdmController : Controller
+    {
+        // GET: Adm
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Authorise(User user)
+        {
+            using (AdminData db = new AdminData())
+            {
+                var userDetials = db.ADtable.Where(u => u.Username.Equals(user.Username) && u.Password.Equals(user.Password)).FirstOrDefault();
+                if (userDetials == null)
+                {
+                    user.LogError = "wrong detials";
+                    return View("Index", user);
+                }
+                else
+                {
+                    Session["Admin"] = user.Username;
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+
+            }
+
+        }

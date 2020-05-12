@@ -1,0 +1,34 @@
+[HttpGet]
+
+        public ActionResult Update(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+            var db = new bookEntities();
+            var toUpdate = db.books.Find(id);
+
+            return View(toUpdate);
+        }
+
+        [HttpPost]
+        public ActionResult Update(int? id, book model)
+        {
+            var db = new bookEntities();
+            var toUpdate = db.books.Find(id);
+            if (ModelState.IsValid)
+            {
+                if (toUpdate != null)
+                {
+                    toUpdate.Id = id ?? default(int);
+                    toUpdate.Firstname = model.Firstname;
+                    toUpdate.Secondname = model.Secondname;
+                    toUpdate.Bookname = model.Bookname;
+                    toUpdate.Author = model.Author;
+                    toUpdate.Datetaken = model.Datetaken;
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("Show", "book");
+        }

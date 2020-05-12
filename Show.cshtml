@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (Session["Admin"] == null)
+    {
+        Response.Redirect("~/Adm/Index");
+    }
+}
+
+<h2>Show</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Firstname
+        </th>
+        <th>
+            Secondname
+        </th>
+        <th>
+            Bookname
+        </th>
+        <th>
+            Author
+        </th>
+        <th>
+            Date took
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.Encode(item.Firstname)</td>
+
+            <td>@Html.Encode(item.Secondname)</td>
+
+            <td>@Html.Encode(item.Bookname)</td>
+
+            <td>@Html.Encode(item.Author)</td>
+
+            <td>@Html.Encode(item.Datetaken)</td>
+
+            <td>
+                @Html.ActionLink("Edit", "update", new { id = item.Id })
+            </td>
+
+            <td>
+                @Html.ActionLink("Delete", "delete", new { id = item.Id })
+            </td>
+
+            <td>
+                @Html.ActionLink("Create", "Create", new { id = item.Id })
+            </td>
+        </tr>
+
+    }
+</table>

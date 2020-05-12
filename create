@@ -1,0 +1,30 @@
+public ActionResult Show()
+        {
+            var entities = new bookEntities();
+            return View(entities.books.ToList());
+        }
+
+        [HttpGet]
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(book model)
+        {
+            if (ModelState.IsValid)
+            {
+                var db = new bookEntities();
+                db.books.Add(new book
+                {
+                    Firstname = model.Firstname,
+                    Secondname = model.Secondname,
+                    Bookname = model.Bookname,
+                    Author = model.Author,
+                    Datetaken = model.Datetaken
+                });db.SaveChanges();
+
+            } return RedirectToAction("Show", "book");
+        }
