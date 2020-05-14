@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using WebApplication1.Models;
 
@@ -33,7 +34,7 @@ namespace WebApplication1.Controllers
                     Secondname = model.Secondname,
                     Username = model.Username,
                     Email = model.Email,
-                    Password = model.Password
+                    Password = Crypto.HashPassword(model.Password)
                 });
                 db.SaveChanges();
             }
